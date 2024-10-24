@@ -5,8 +5,9 @@ const skills = [
   {
     category: "Frontend",
     items: [
-      { name: "React", level: 90 },
-      { name: "Vue", level: 85 },
+      { name: "Angular", level: 90 },
+      { name: "React", level: 70 },
+      { name: "Svelte", level: 85 },
       { name: "TypeScript", level: 88 },
       { name: "Tailwind CSS", level: 92 },
     ],

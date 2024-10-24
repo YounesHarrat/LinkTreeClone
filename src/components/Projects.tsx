@@ -20,7 +20,7 @@ export function Projects() {
     fetch("https://api.github.com/users/YounesAH15/repos")
       .then((res) => res.json())
       .then((data) => {
-        setProjects(data.slice(0, 4));
+        setProjects(data.slice(4));
         setLoading(false);
       })
       .catch(() => setLoading(false));

@@ -13,17 +13,38 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    
-    setLoading(false);
-    (e.target as HTMLFormElement).reset();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    try {
+      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thanks for reaching out. I'll get back to you soon.",
+        });
+        (e.target as HTMLFormElement).reset();
+      } else {
+        toast({
+          title: "Error",
+          description: "There was an issue sending your message. Please try again later.",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an issue sending your message. Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -31,13 +52,13 @@ export function ContactForm() {
       <h2 className="text-xl font-semibold mb-4">Get in Touch</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Input placeholder="Your Name" required />
+          <Input name="name" placeholder="Your Name" required />
         </div>
         <div>
-          <Input type="email" placeholder="Your Email" required />
+          <Input type="email" name="email" placeholder="Your Email" required />
         </div>
         <div>
-          <Textarea placeholder="Your Message" required className="min-h-[100px]" />
+          <Textarea name="message" placeholder="Your Message" required className="min-h-[100px]" />
         </div>
         <div className="flex justify-between items-center">
           <Button type="submit" disabled={loading}>
@@ -45,7 +66,7 @@ export function ContactForm() {
             {loading ? "Sending..." : "Send Message"}
           </Button>
           <a
-            href="mailto:younesharrat@example.com"
+            href="mailto:younesharrat5896@gmail.com"
             className="text-sm text-muted-foreground hover:underline"
           >
             Or email me directly
