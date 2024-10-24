@@ -1,0 +1,11 @@
+---
+import '@/styles/globals.css'
+import Layout from '../layouts/Layout.astro';
+import Portfolio from '../components/Portfolio';
+---
+
+<Layout title="Portfolio | YounesHarrat">
+  <main class="min-h-screen bg-gradient-to-b from-background to-muted py-12 px-4">
+    <Portfolio client:load />
+  </main>
+</Layout>

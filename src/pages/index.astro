@@ -1,0 +1,11 @@
+---
+import '@/styles/globals.css'
+import Layout from '../layouts/Layout.astro';
+import Profile from '../components/Profile';
+---
+
+<Layout title="Links | YounesHarrat">
+  <main class="min-h-screen bg-gradient-to-b from-background to-muted py-12 px-4">
+    <Profile client:load />
+  </main>
+</Layout>
